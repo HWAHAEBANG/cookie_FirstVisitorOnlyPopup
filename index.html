@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .notice{
+      position: fixed;
+      padding: 20px;
+      border: 1px solid #ccc;
+      top: 100px;
+      left: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class = "notice">Notice</div>
+  <button onclick="deleteCookie()">쿠키제거</button>
+  <script>
+/* 기존에 쿠기 있는지 확인하기 */
+    //console.log(document.cookie);
+    let currentCookie = document.cookie;
+    let cookieCheck = currentCookie.indexOf('ABC')
+
+    //console.log(cookieCheck);
+
+    if(cookieCheck > -1){
+      document.querySelector('.notice').style.display = 'none';
+    } else {
+      document.querySelector('.notice').style.display = 'block';
+    }
+
+
+/* 쿠키 추가하기 */
+    let date = new Date(); // 오늘의 날짜 반환 
+//console.log(date);
+   //console.log(date.getDate() + 7); 
+    date.setDate(date.getDate() + 7); // 변수.setDate(새로운 날짜);
+    //console.log(date);
+
+    let setCookie = ''
+    setCookie += 'CookieName = ABC;'
+    setCookie += 'Expires ='+ date.toUTCString();
+
+    console.log(setCookie);
+    document.cookie = setCookie;
+
+
+  /* 쿠키 삭제 함수  */
+    function deleteCookie(){
+      let date = new Date(); // 오늘의 날짜 반환 
+    //  console.log(date);
+   //console.log(date.getDate() + 7); 
+    date.setDate(date.getDate() - 1); // 변수.setDate(새로운 날짜);
+    //console.log(date);
+
+    let setCookie = ''
+    setCookie += 'CookieName = ABC;'
+    setCookie += 'Expires ='+ date.toUTCString();
+
+    //console.log(setCookie);
+    document.cookie = setCookie;
+
+    }
+
+
+  </script>
+</body>
+</html>
